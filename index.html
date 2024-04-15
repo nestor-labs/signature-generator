@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic HTML Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      input[type="text"] {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Aldara signature generator</h2>
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" />
+      <label for="role">Role:</label>
+      <input type="text" id="role" placeholder="Enter your role" />
+      <label for="linkedin">Linkedin URL:</label>
+      <input type="text" id="linkedin" placeholder="Enter your linkedin URL" />
+      <button onclick="generateHTML()">Generate HTML</button>
+      <hr />
+      <div id="generatedHTML"></div>
+    </div>
+
+    <script>
+      function generateHTML() {
+        const name = document.getElementById("name").value;
+        const role = document.getElementById("role").value;
+        const linkedin = document.getElementById("linkedin").value;
+
+        const html = `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Signature</title>
+  </head>
+  <body>
+    <table cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+          <p
+            style="
+              margin: 0;
+              font-family: Arial, sans-serif;
+              font-size: 14px;
+              color: #666;
+            "
+          >
+            ${name}
+          </p>
+          <p
+            style="
+              margin: 0;
+              font-family: Arial, sans-serif;
+              font-size: 14px;
+              color: #666;
+            "
+          >
+            ${role} @
+            <a href="https://www.aldara.com/">Aldara</a>
+            |
+            <a href="${linkedin}">Linkedin</a>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-top: 6px">
+          <img
+            src="data:image/png;base64,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"
+            alt="Aldara"
+            width="100"
+          />
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+
+        document.getElementById("generatedHTML").innerHTML = html;
+      }
+    </script>
+  </body>
+</html>
