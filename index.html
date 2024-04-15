@@ -38,11 +38,17 @@
     <div class="container">
       <h2>Aldara signature generator</h2>
       <label for="name">Name:</label>
-      <input type="text" id="name" placeholder="Enter your name" />
+      <input type="text" id="name" placeholder="Gabi Ferraté" />
       <label for="role">Role:</label>
-      <input type="text" id="role" placeholder="Enter your role" />
+      <input type="text" id="role" placeholder="CTO" />
       <label for="linkedin">Linkedin URL:</label>
-      <input type="text" id="linkedin" placeholder="Enter your linkedin URL" />
+      <input
+        type="text"
+        id="linkedin"
+        placeholder="https://www.linkedin.com/in/gferrate/"
+      />
+      <label for="mobile">Phone number (opcional):</label>
+      <input type="text" id="mobile" placeholder="+34 655 467 882" />
       <button onclick="generateHTML()">Generate HTML</button>
       <br />
       <div id="generatedHTML" style="margin-top: 20px"></div>
@@ -53,6 +59,19 @@
         const name = document.getElementById("name").value;
         const role = document.getElementById("role").value;
         const linkedin = document.getElementById("linkedin").value;
+        const mobile = document.getElementById("mobile").value;
+        const mobileHtml = !!mobile
+          ? `<p
+  style="
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #666;
+  "
+>
+  ${mobile}
+</p>`
+          : "";
 
         const html = `
 <!DOCTYPE html>
@@ -89,6 +108,7 @@
             |
             <a href="${linkedin}">Linkedin</a>
           </p>
+          ${mobileHtml}
         </td>
       </tr>
       <tr>
